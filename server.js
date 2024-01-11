@@ -25,8 +25,8 @@ function send(res, contentType, fileName) {
     });
 }
 
-app.get('/style.css', (req, res) => {
-    send(res, 'text/css', 'style.css');
+app.get('/index.css', (req, res) => {
+    send(res, 'text/css', 'index.css');
 });
 
 app.get('/expense.html', (req, res) => {
