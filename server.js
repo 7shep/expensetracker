@@ -33,5 +33,9 @@ app.get('/expense.html', (req, res) => {
     send(res, 'text/html', 'expense.html');
 })
 
+app.get('/expense.css', (req, res) => {
+    send(res, 'text/css', 'expense.css');
+})
+
 console.log('Listening');
 app.listen(5500);

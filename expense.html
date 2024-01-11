@@ -3,9 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Shep's Expense Tracker</title>
+    <link rel="stylesheet" href="expense.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <h1>expense</h1>
+    <table style="width:85%; margin: auto;">
+        <thead>
+            <tr class="budgetheaders">
+                <th>Budget Category</th>
+                <th>Budget</th>
+                <th>Incurred</th>
+                <th>Remaining</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Fixed Expenses</td>
+                <td><input type="number" class="budget-input1" placeholder="0.00"></td>
+                <td><input type="number" class="incurred-input1" placeholder="0.00"></td>
+                <td class="remaining">$500.00</td>
+                <td><button onclick="addToTotal(this)">Add</button></td>
+            </tr>
+            <tr>
+                <td>Investments</td>
+                <td><input type="number" class="budget-input2" placeholder="0.00"></td>
+                <td><input type="number" class="incurred-input2" placeholder="0.00"></td>
+                <td class="remaining">$500.00</td>
+                <td><button onclick="addToTotal(this)">Add</button></td>
+            </tr>
+            <tr>
+                <td>Food</td>
+                <td><input type="number" class="budget-input3" placeholder="0.00"></td>
+                <td><input type="number" class="incurred-input3" placeholder="0.00"></td>
+                <td class="remaining">$500.00</td>
+                <td><button onclick="addToTotal(this)">Add</button></td>
+            </tr>
+            <tr>
+                <td>Gambling </td>
+                <td><input type="number" class="budget-input4" placeholder="0.00"></td>
+                <td><input type="number" class="incurred-input4" placeholder="0.00"></td>
+                <td class="remaining">$500.00</td>
+                <td><button onclick="addToTotal(this)">Add</button></td>
+            </tr>
+            <!-- Repeat the above row for each category -->
+        </tbody>
+    </table>
 </body>
 </html>

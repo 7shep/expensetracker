@@ -1,0 +1,77 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #210b2c; /* Dark purple background */
+    color: #d8b4e2; /* Light purple text */
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 85%;
+    margin: 20px auto; /* Center table with margin */
+    box-shadow: 0px 0px 15px 0px #55286f; /* Soft purple shadow */
+    border-radius: 8px; /* Rounded corners for the table */
+    overflow: hidden; /* Ensures the inner elements conform to the table's border radius */
+}
+
+.budgetheaders th {
+    background-color: #55286f; /* Medium purple background */
+    color: #d8b4e2; /* Light purple text */
+    padding: 10px;
+    border-bottom: 2px solid #ae759f; /* Mauve border */
+}
+
+/* Style for table cells */
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ae759f; /* Mauve border */
+    background-color: #bc96e6; /* Light purple background */
+    color: #210b2c; /* Dark purple text */
+}
+
+/* Style for input fields */
+input[type="number"] {
+    padding: 5px;
+    border: 1px solid #ae759f; /* Mauve border */
+    background-color: #d8b4e2; /* Light purple background */
+    color: #210b2c; /* Dark purple text */
+    border-radius: 4px; /* Rounded corners for input fields */
+}
+
+button {
+    padding: 5px 10px;
+    border: none;
+    background-color: #ae759f; /* Mauve background */
+    color: #d8b4e2; /* Light purple text */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 4px; /* Rounded corners for buttons */
+}
+
+button:hover {
+    background-color: #bc96e6; /* Light purple background */
+}
+
+/* Style for the 'Remaining' column */
+.remaining {
+    font-weight: bold;
+}
+
+/* General table styles */
+thead {
+    text-align: left;
+}
+
+tbody tr:hover {
+    background-color: #d8b4e2; /* Light purple background for hover */
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+tbody td {
+    border-bottom: none; /* Remove border from the last row for a smooth look */
+}
