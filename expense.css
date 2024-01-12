@@ -75,3 +75,9 @@ tbody tr:last-child td {
 tbody td {
     border-bottom: none; /* Remove border from the last row for a smooth look */
 }
+
+.budget-summary {
+    text-align: center;
+    margin: 20px 0;
+    color: #d8b4e2;
+}
