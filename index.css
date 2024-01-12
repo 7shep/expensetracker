@@ -57,3 +57,24 @@ body, html {
   color: #ff0084;
   border-color: #ff0084;
 }
+/* Define the keyframes for the cursor blink animation */
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.welcome {
+  /* Your existing styles... */
+  text-align: center; /* Center the text */
+}
+
+#animated-text {
+  display: inline-block; /* Required for the cursor to sit alongside the text */
+  font-size: 3.74em; /* Example font size, adjust as needed */
+  margin: 0 auto; /* Center the text if not already centered */
+  white-space: nowrap; /* Ensure the text doesn't wrap */
+  border-right: 2px solid black; /* This will simulate the typing cursor */
+  
+}
+

@@ -7,7 +7,7 @@ var app = express();
 app.use(cookieParser());
 
 function send(res, contentType, fileName) {
-    console.log(`Attempting to send file: ${fileName}`); // Add this line for debugging
+    //console.log(`Attempting to send file: ${fileName}`); // Add this line for debugging
     res.set('Content-Type', contentType);
     fs.readFile(fileName, (err, data) => {
         if (err) {
@@ -45,6 +45,9 @@ app.get('/script.js', (req, res) => {
     send(res, 'application/javascript', 'script.js');
 })
 
+app.get('/animation.js', (req, res) => {
+    send(res, 'application/javascript', 'animation.js');
+})
 
 console.log('Listening');
 app.listen(5500);
