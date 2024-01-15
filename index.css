@@ -71,10 +71,10 @@ body, html {
 
 #animated-text {
   display: inline-block; /* Required for the cursor to sit alongside the text */
-  font-size: 3.74em; /* Example font size, adjust as needed */
+  font-size: 3.72em; /* Example font size, adjust as needed */
   margin: 0 auto; /* Center the text if not already centered */
   white-space: nowrap; /* Ensure the text doesn't wrap */
-  border-right: 2px solid black; /* This will simulate the typing cursor */
+  /*border-right: 2px solid black;  This will simulate the typing cursor */
   
 }
 
