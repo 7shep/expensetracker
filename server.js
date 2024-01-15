@@ -75,6 +75,12 @@ app.get('/login.css', (req, res) => {
     send(res, 'text/css', 'Login/login.css');
 })
 
+app.get('/Login/forgotpassword.html', (req, res) => {
+    send(res, 'text/html', 'Login/forgotpassword.html');
+})
+
+app.get('/')
+
 
 
 console.log('Listening');
