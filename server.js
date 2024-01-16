@@ -9,6 +9,8 @@ const { getDatabase } = require('firebase/database');
 
 var app = express();
 app.use(cookieParser());
+app.use(express.json()); // This will parse incoming JSON payloads
+
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -59,8 +61,8 @@ app.get('/expense.css', (req, res) => {
     send(res, 'text/css', 'expense.css');
 })
 
-app.get('/script.js', (req, res) => {
-    send(res, 'application/javascript', 'script.js');
+app.get('/budget.js', (req, res) => {
+    send(res, 'application/javascript', 'budget.js');
 })
 
 app.get('/animation.js', (req, res) => {
@@ -75,6 +77,11 @@ app.get('/Login/login.css', (req, res) => {
     send(res, 'text/css', 'Login/login.css');
 })
 
+app.get('/Login/login.js', (req, res) => {
+    send(res, 'application/javascript', 'Login/login.js');
+})
+
+
 app.get('/forgotpassword.html', (req, res) => {
     send(res, 'text/html', 'Login/forgotpassword.html');
 })
@@ -83,9 +90,19 @@ app.get('/Register/register.html', (req, res) => {
     send(res, 'text/html', 'Register/register.html');
 })
 
+app.post('/login', (req, res) => {
+    const user = req.body.username;
+    const password = req.body.password;
+    console.log(user, password);
+    res.json({ success: true, message: 'Logged in!' }); // Send a JSON response
 
+})
 
+app.post('/register', (req, res) => {
+    res.json({ success: true, message: 'Registration successful!' }); // Send a JSON response
+})
 
 
 console.log('Listening');
+app.use(express.json());
 app.listen(5500);
