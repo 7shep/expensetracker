@@ -71,15 +71,19 @@ app.get('/Login/login.html', (req, res) => {
     send(res, 'text/html', 'Login/login.html');
 })
 
-app.get('/login.css', (req, res) => {
+app.get('/Login/login.css', (req, res) => {
     send(res, 'text/css', 'Login/login.css');
 })
 
-app.get('/Login/forgotpassword.html', (req, res) => {
+app.get('/forgotpassword.html', (req, res) => {
     send(res, 'text/html', 'Login/forgotpassword.html');
 })
 
-app.get('/')
+app.get('/Register/register.html', (req, res) => {
+    send(res, 'text/html', 'Register/register.html');
+})
+
+
 
 
 
