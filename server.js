@@ -1,13 +1,14 @@
 // Imports
-var express = require('express');
-var fs = require('fs');
-var cookieParser = require('cookie-parser');
+const express = require('express');
+const fs = require('fs');
+const cookieParser = require('cookie-parser');
+const admin = require('firebase-admin');
 
 // Firebase imports
 const { initializeApp } = require('firebase/app');
 const { getDatabase } = require('firebase/database');
 
-var app = express();
+const app = express();
 app.use(cookieParser());
 app.use(express.json()); // This will parse incoming JSON payloads
 
@@ -90,18 +91,71 @@ app.get('/Register/register.html', (req, res) => {
     send(res, 'text/html', 'Register/register.html');
 })
 
-app.post('/login', (req, res) => {
+app.get('Register/register.css', (req, res) => {
+    send(res, 'text/css', 'Register/register.css');
+})
+
+app.post('/login', async (req, res) => {
     const user = req.body.username;
     const password = req.body.password;
-    console.log(user, password);
-    res.json({ success: true, message: 'Logged in!' }); // Send a JSON response
 
-})
+    try {
+        const userRecord = await admin.auth().getUserByEmail(user);
+        // Add logic to verify the password here (e.g., comparing hashed passwords)
+        // ...
+        res.json({ success: true, message: 'Logged in!' });
+    } catch (error) {
+        res.status(401).json({ success: false, message: 'Authentication failed!' });
+    }
+});
 
-app.post('/register', (req, res) => {
-    res.json({ success: true, message: 'Registration successful!' }); // Send a JSON response
-})
+// Handle registration request
+app.post('/register', async (req, res) => {
+    const registeruser = req.body.username;
+    const registerpassword = req.body.password;
 
+    try {
+        const userRecord = await admin.auth().createUser({
+            email: registeruser,
+            password: registerpassword
+        });
+        res.json({ success: true, message: 'Registration successful!' });
+    } catch (error) {
+        res.status(500).json({ success: false, message: 'Registration failed!' });
+    }
+});
+
+
+// Initialize Firebase Admin SDK
+admin.initializeApp({
+    credential: admin.credential.cert('serviceAccountKey.json'),
+});
+
+app.post('/api/login', async (req, res) => {
+    try {
+        const { username, password } = req.body;
+        const user = await admin.auth().getUserByEmail(username);
+        // Verify password here (consider using custom authentication system)
+        // Create session if needed
+        res.json({ success: true, message: 'Logged in!' });
+    } catch (error) {
+        res.status(401).json({ success: false, message: 'Login failed' });
+    }
+});
+
+app.post('/api/register', async (req, res) => {
+    try {
+        const { username, password } = req.body;
+        await admin.auth().createUser({
+            email: username,
+            password,
+        });
+        res.json({ success: true, message: 'Registration successful!' });
+    } catch
+(error) {
+res.status(400).json({ success: false, message: 'Registration failed' });
+}
+});
 
 console.log('Listening');
 app.use(express.json());

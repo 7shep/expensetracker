@@ -3,9 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register an Account</title>
+    <title>Account Login</title>
+    <link rel="stylesheet" href="register.css">
+    <script src="register.js"></script>
 </head>
 <body>
-    <h1>Working...</h1>
+    <div class="login-container">
+        <h2>ACCOUNT LOGIN</h2>
+        <form class="login-form">
+            <div class="input-group">
+                <label for="username" placeholder="Username">USERNAME</label>
+                <input type="text" id="username" name="username">
+            </div>
+            <div class="input-group">
+                <label for="password" placeholder="Password">PASSWORD</label>
+                <input type="password" id="password" name="password">
+            </div>
+            <div class="login-options">
+                <label class="remember-me">
+                    <input type="checkbox" name="remember"> Remember me
+                </label>
+                <a href="/forgotpassword.html" class="forgot-password">Forgot Password?</a>
+            </div>
+            <button type="submit" class="login-button">Login</button>
+            <button type="" class="register-button">Make an Account</button>
+        </form>
+    </div>
 </body>
 </html>

@@ -1,67 +1,42 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // This function will make a POST request to create an account
-    window.makeAccount = function() {
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-        
-        // Create a POST request to the '/register' route.
-        fetch('/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ username: username, password: password }),
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Handle response data here
-            console.log(data);
-            if (data.success) {
-                window.location.href = '/expense.html'; // Redirect to the dashboard or another page.
-            } else {
-                alert('Registration failed: ' + data.message);
-            }
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-    };
+    const loginForm = document.querySelector('.login-form');
+    loginForm.addEventListener('submit', function(event) {
+        event.preventDefault();
 
-    // Attach event listener to the login form to handle submission
-    document.querySelector('.login-form').addEventListener('submit', function(e) {
-        e.preventDefault(); // Prevent the default form submission
+        const formData = new FormData(loginForm);
+        const data = {
+            username: formData.get('username'),
+            password: formData.get('password')
+        };
 
-        // Determine which button was clicked to submit the form
-        let buttonClicked = document.activeElement;
-
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-
-        if (buttonClicked.classList.contains('login-button')) {
-            // If the login button was clicked, send a POST request to '/login'
+        if (event.submitter.className.includes('login-button')) {
+            // Handle login
             fetch('/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ username: username, password: password }),
+                body: JSON.stringify(data),
             })
             .then(response => response.json())
             .then(data => {
-                // Handle response data here
+                // Handle response here
                 console.log(data);
-                if (data.success) {
-                    window.location.href = '/expense.html'; // Redirect to the dashboard or another page.
-                } else {
-                    alert('Login failed: ' + data.message);
-                }
-            })
-            .catch((error) => {
-                console.error('Error:', error);
             });
-        } else if (buttonClicked.classList.contains('register-button')) {
-            // If the register button was clicked, call makeAccount function
-            makeAccount();
+        } else if (event.submitter.className.includes('register-button')) {
+            // Handle account creation
+            fetch('/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle response here
+                console.log(data);
+            });
         }
     });
 });
