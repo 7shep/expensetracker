@@ -6,27 +6,32 @@ const admin = require('firebase-admin');
 
 // Firebase imports
 const { initializeApp } = require('firebase/app');
-const { getDatabase } = require('firebase/database');
+const { ref, set, getDatabase } = require('firebase/database');
+
 
 const app = express();
 app.use(cookieParser());
 app.use(express.json()); // This will parse incoming JSON payloads
 
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyChG3rvO-2dWLqzaxQS2BVSfG953CJXJUg",
-  authDomain: "tej4mculminating.firebaseapp.com",
-  projectId: "tej4mculminating",
-  storageBucket: "tej4mculminating.appspot.com",
-  messagingSenderId: "951928473492",
-  appId: "1:951928473492:web:2d5303a38572c243b2f181",
-  measurementId: "G-8YSK128KTF"
-};
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Initialize Firebase
-const fbapp = initializeApp(firebaseConfig);
-const database = getDatabase(fbapp);
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+    apiKey: "AIzaSyChG3rvO-2dWLqzaxQS2BVSfG953CJXJUg",
+    authDomain: "tej4mculminating.firebaseapp.com",
+    projectId: "tej4mculminating",
+    storageBucket: "tej4mculminating.appspot.com",
+    messagingSenderId: "951928473492",
+    appId: "1:951928473492:web:2d5303a38572c243b2f181",
+    measurementId: "G-8YSK128KTF"
+  };
+  
+  // Initialize Firebase
+  const fbapp = initializeApp(firebaseConfig);
+  //const analytics = getAnalytics(fbapp);
 
 function send(res, contentType, fileName) {
     res.set('Content-Type', contentType);
@@ -95,67 +100,25 @@ app.get('Register/register.css', (req, res) => {
     send(res, 'text/css', 'Register/register.css');
 })
 
-app.post('/login', async (req, res) => {
-    const user = req.body.username;
-    const password = req.body.password;
+app.post('/userlogin', (req, res) => {
 
-    try {
-        const userRecord = await admin.auth().getUserByEmail(user);
-        // Add logic to verify the password here (e.g., comparing hashed passwords)
-        // ...
-        res.json({ success: true, message: 'Logged in!' });
-    } catch (error) {
-        res.status(401).json({ success: false, message: 'Authentication failed!' });
-    }
-});
+    const username = req.body.userName;
+    const password = req.body.pswd;
 
-// Handle registration request
-app.post('/register', async (req, res) => {
-    const registeruser = req.body.username;
-    const registerpassword = req.body.password;
+    console.log(username, password);
+    sendInfo(username, password);
+})
 
-    try {
-        const userRecord = await admin.auth().createUser({
-            email: registeruser,
-            password: registerpassword
-        });
-        res.json({ success: true, message: 'Registration successful!' });
-    } catch (error) {
-        res.status(500).json({ success: false, message: 'Registration failed!' });
-    }
-});
+function sendInfo(username, password) {
+    const database = getDatabase();
+    const userRef = ref(database, 'user/' + Math.floor(Math.random() * 10000));
 
-
-// Initialize Firebase Admin SDK
-admin.initializeApp({
-    credential: admin.credential.cert('serviceAccountKey.json'),
-});
-
-app.post('/api/login', async (req, res) => {
-    try {
-        const { username, password } = req.body;
-        const user = await admin.auth().getUserByEmail(username);
-        // Verify password here (consider using custom authentication system)
-        // Create session if needed
-        res.json({ success: true, message: 'Logged in!' });
-    } catch (error) {
-        res.status(401).json({ success: false, message: 'Login failed' });
-    }
-});
-
-app.post('/api/register', async (req, res) => {
-    try {
-        const { username, password } = req.body;
-        await admin.auth().createUser({
-            email: username,
-            password,
-        });
-        res.json({ success: true, message: 'Registration successful!' });
-    } catch
-(error) {
-res.status(400).json({ success: false, message: 'Registration failed' });
+    set(userRef, {
+        Username: username,
+        Password: password
+    });
+    console.log('Sent to Firebase!');
 }
-});
 
 console.log('Listening');
 app.use(express.json());
