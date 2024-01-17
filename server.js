@@ -31,6 +31,8 @@ const firebaseConfig = {
   
   // Initialize Firebase
   const fbapp = initializeApp(firebaseConfig);
+  const database = getDatabase();
+  //const ref = database.ref('server/saving-data/fireblog/posts');
   //const analytics = getAnalytics(fbapp);
 
 function send(res, contentType, fileName) {
@@ -110,7 +112,6 @@ app.post('/userlogin', (req, res) => {
 })
 
 function sendInfo(username, password) {
-    const database = getDatabase();
     const userRef = ref(database, 'user/' + Math.floor(Math.random() * 10000));
 
     set(userRef, {
@@ -119,7 +120,14 @@ function sendInfo(username, password) {
     });
     console.log('Sent to Firebase!');
 }
-
+/*
+ref.on('child_added', (snapshot, prevChildKey) => {
+    const newPost = snapshot.val();
+    console.log("Author: " + newPost.author);
+    console.log("Title: " + newPost.title);
+    console.log("Previous Post ID " + newPost.prevChildKey);
+})
+*/
 console.log('Listening');
 app.use(express.json());
 app.listen(5500);

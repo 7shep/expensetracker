@@ -9,25 +9,28 @@ document.addEventListener("DOMContentLoaded", () => {
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
 
-        //console.log(username, password);
-        fetch("/userlogin", {
-            method: 'POST',
-            body: JSON.stringify({
-                userName: username,
-                pswd: password
-            }),
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-              }
-        });
+        if(username == '' || password == '') {
+            alert("Invalid Username or Password.")
+        } else {
+            //console.log(username, password);
+            fetch("/userlogin", {
+                method: 'POST',
+                body: JSON.stringify({
+                    userName: username,
+                    pswd: password
+                }),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            });
+        }
+    })
 
+    const login = document.getElementById('login');
+    login.addEventListener("click", () => {
+
+    fetch("")
 
 
     })
-
-    const loginbutton = document.getElementById('login');
-    loginbutton.addEventListener("click", () => {
-        window.location.href="uid.html";
-    })
-
 })
