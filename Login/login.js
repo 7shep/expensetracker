@@ -22,15 +22,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 headers: {
                     "Content-type": "application/json; charset=UTF-8"
                 }
-            });
+            })
         }
     })
 
     const login = document.getElementById('login');
     login.addEventListener("click", () => {
-
-    fetch("")
-
-
+        window.location.href = 'expense.html';
     })
 })

@@ -28,28 +28,28 @@
             <tr>
                 <td>Fixed Expenses</td>
                 <td class="budget-amount">$0.00</td>
-                <td><input type="number" class="incurred-input" placeholder="0.00"></td>
+                <td><input type="number" class="incurred-input" placeholder="0.00" id="fixed"></td>
                 <td class="remaining">$0.00</td>
                 <td><button onclick="addToTotal(this)">Add</button></td>
             </tr>
             <tr>
                 <td>Investments</td>
                 <td class="budget-amount">$0.00</td>
-                <td><input type="number" class="incurred-input" placeholder="0.00"></td>
+                <td><input type="number" class="incurred-input" placeholder="0.00" id="investment"></td>
                 <td class="remaining">$0.00</td>
                 <td><button onclick="addToTotal(this)">Add</button></td>
             </tr>
             <tr>
                 <td>Food</td>
                 <td class="budget-amount">$0.00</td>
-                <td><input type="number" class="incurred-input" placeholder="0.00"></td>
+                <td><input type="number" class="incurred-input" placeholder="0.00" id="food"></td>
                 <td class="remaining">$0.00</td>
                 <td><button onclick="addToTotal(this)">Add</button></td>
             </tr>
             <tr>
                 <td>Gambling</td>
                 <td class="budget-amount">$0.00</td>
-                <td><input type="number" class="incurred-input" placeholder="0.00"></td>
+                <td><input type="number" class="incurred-input" placeholder="0.00" id="gambling"></td>
                 <td class="remaining">$0.00</td>
                 <td><button onclick="addToTotal(this)">Add</button></td>
             </tr>
@@ -60,6 +60,7 @@
                 <td id="total-budget">$0.00</td>
                 <td id="total-incurred">$0.00</td>
                 <td id="total-remaining">$0.00</td>
+                <td><button id="send">Send</button></td>
                 <td></td>
             </tr>
         </tfoot>

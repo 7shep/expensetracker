@@ -5,6 +5,20 @@ const budgetPercentages = {
     'Gambling': 0.25
 };
 
+
+document.addEventListener("DOMContentLoaded", () => {
+    const sendButton = document.getElementById('send');
+    sendButton.addEventListener("click", () => {
+        const fixedIncurred = document.getElementById('fixed').value;
+        const investmentIncurred = document.getElementById('investment').value;
+        const foodIncurred = document.getElementById('food').value;
+        const gamblingIncurred = document.getElementById('gambling').value;
+        console.log(fixedIncurred, investmentIncurred, foodIncurred, gamblingIncurred);
+        sendTotals(fixedIncurred, investmentIncurred, foodIncurred, gamblingIncurred);
+        console.log("totals sent");
+    })
+})
+
 function updateBudget() {
     let monthlyIncome = parseFloat(document.getElementById('monthly-pay').value) || 0;
     Object.keys(budgetPercentages).forEach((category, index) => {
@@ -29,21 +43,22 @@ function addToTotal(button) {
     updateTotals();
 }
 
-function updateTotals() {
-    let totalBudget = 0;
-    let totalIncurred = 0;
-    let totalRemaining = 0;
-
-    Array.from(document.getElementsByClassName('budget-amount')).forEach((budgetCell) => {
-        totalBudget += parseFloat(budgetCell.textContent.replace('$', ''));
-    });
-
-    Array.from(document.getElementsByClassName('incurred-input')).forEach((incurredInput) => {
-        totalIncurred += parseFloat(incurredInput.value) || 0;
+function sendTotals(fixedIncurred, foodIncurred, gamblingIncurred, investmentIncurred) {
+    fetch('/budget', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json' // This line is necessary
+        },
+        body: JSON.stringify({
+            Fixed: fixedIncurred,
+            Investment: investmentIncurred,
+            Food: foodIncurred,
+            Gambling: gamblingIncurred 
+        })
     });
 }
 
-// ... (rest of your script)
+
 
 function updateTotals() {
     let totalBudget = 0;
