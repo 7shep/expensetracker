@@ -13,7 +13,7 @@ const app = express();
 app.use(cookieParser());
 app.use(express.json()); // This will parse incoming JSON payloads
 
-let GlobalUserRef;
+
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -48,6 +48,9 @@ function send(res, contentType, fileName) {
     });
 }
 
+//const GlobalUserRef = ref(database, 'user/' + Math.floor(Math.random() * 10000));
+const GlobalUserRef = Math.floor(Math.random() * 10000);
+console.log(GlobalUserRef);
 
 
 app.get('/', (req, res) => {
@@ -125,21 +128,19 @@ app.post('/budget', (req, res) => {
 })
 
 function sendInfo(username, password) {
-    GlobalUserRef = ref(database, 'user/' + Math.floor(Math.random() * 10000));
-
-    set(GlobalUserRef, {
+    const useridref = ref(database, 'user/' + GlobalUserRef)
+    set(useridref, {
         Username: username,
         Password: password
     });
     console.log('Sent to Firebase!');
-    app.post('/userid', (userRef, req, res) => {
-        return userRef;
-    });
     console.log("POST")
 }
 
 function sendExpenses(fixed, investment, food, gambling) {
-    set(GlobalUserRef, {
+    const expensesRef = ref(database, 'user/' + GlobalUserRef + '/Expenses');
+
+    set(expensesRef, {
         FixedExpenses: fixed,
         Investment: investment,
         Food: food,
