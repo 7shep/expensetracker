@@ -2,7 +2,7 @@
 const express = require('express');
 const fs = require('fs');
 const cookieParser = require('cookie-parser');
-const admin = require('firebase-admin');
+
 
 // Firebase imports
 const { initializeApp } = require('firebase/app');
@@ -36,6 +36,7 @@ const firebaseConfig = {
   //const ref = database.ref('server/saving-data/fireblog/posts');
   //const analytics = getAnalytics(fbapp);
 
+//Function to send to database!
 function send(res, contentType, fileName) {
     res.set('Content-Type', contentType);
     fs.readFile(fileName, (err, data) => {
@@ -49,6 +50,7 @@ function send(res, contentType, fileName) {
 }
 
 //const GlobalUserRef = ref(database, 'user/' + Math.floor(Math.random() * 10000));
+//The global UserID
 const GlobalUserRef = Math.floor(Math.random() * 10000);
 console.log(GlobalUserRef);
 
@@ -106,6 +108,7 @@ app.get('Register/register.css', (req, res) => {
     send(res, 'text/css', 'Register/register.css');
 })
 
+
 app.post('/userlogin', (req, res) => {
 
     const username = req.body.userName;
@@ -127,8 +130,9 @@ app.post('/budget', (req, res) => {
     sendExpenses(fixedexp, investmentexp, foodexp, gamblingexp);
 })
 
+//Sends username & password to Firebase!
 function sendInfo(username, password) {
-    const useridref = ref(database, 'user/' + GlobalUserRef)
+    const useridref = ref(database, 'user/' + GlobalUserRef + '/Login Info')
     set(useridref, {
         Username: username,
         Password: password
@@ -137,6 +141,7 @@ function sendInfo(username, password) {
     console.log("POST")
 }
 
+//Sends the expenses to Firebase!
 function sendExpenses(fixed, investment, food, gambling) {
     const expensesRef = ref(database, 'user/' + GlobalUserRef + '/Expenses');
 
@@ -158,6 +163,7 @@ ref.on('child_added', (snapshot, prevChildKey) => {
     console.log("Previous Post ID " + newPost.prevChildKey);
 })
 */
+
 console.log('Listening');
 app.use(express.json());
 app.listen(5500);
